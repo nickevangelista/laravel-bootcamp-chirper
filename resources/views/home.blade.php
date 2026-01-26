@@ -1,4 +1,5 @@
 <x-layout>
+    {{-- Because we would have to duplicate the home page every time and change for a new page, we create a template for all--}}
     <x-slot:title>
         Welcome
     </x-slot:title>

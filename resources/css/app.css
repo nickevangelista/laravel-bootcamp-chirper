@@ -2,9 +2,12 @@
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+/* the source stuff is telling talwind where I write my HTML classes so that it can generate the necessary CSS for it */
 @source '../../storage/framework/views/*.php';
+/* looks at the cache files from compilated views, this helps guarantee that dynamic modifications be seen */
 @source '../**/*.blade.php';
 @source '../**/*.js';
+/* tells tailwind to monitor all of the files .blade.php and files .js inside the resources folder. */
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',

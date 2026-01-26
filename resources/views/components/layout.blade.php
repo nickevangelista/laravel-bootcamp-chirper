@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- the @vite directive its telling laravel that we ant to use the app.css and app.js files --}}
+    {{-- laravel and the bootcamp is using talwing CSS with an already setted theme for the page --}}
 </head>
 
 <body class="min-h-screen flex flex-col bg-base-200 font-sans">
