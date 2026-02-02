@@ -2,81 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chirp;
 use Illuminate\Http\Request;
 
 class ChirpController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $chirps = [
-        [
-            'author' => 'Jane Doe',
-            'message' => 'Just deployed my first Laravel app! 🚀',
-            'time' => '5 minutes ago'
-        ],
-        [
-            'author' => 'John Smith',
-            'message' => 'Laravel makes web development fun again!',
-            'time' => '1 hour ago'
-        ],
-        [
-            'author' => 'Alice Johnson',
-            'message' => 'Working on something cool with Chirper...',
-            'time' => '3 hours ago'
-        ]
-    ];
+        $chirps = Chirp::with('user')
+            ->latest()
+            ->take(50)  // Limit to 50 most recent chirps
+            ->get();
 
-    return view('home', ['chirps' => $chirps]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('home', ['chirps' => $chirps]);
     }
 }
+    // Chirp::with('user') - This is so that we can eager load that user relationship and it prevents N+1 queries—in that case, having to query the database multiple times for things that we already have
+
+    // latest() - We want to grab those chirps via the latest, ordering by created_at, newest first
+
+    // take(50) - Let's say we want to take 50 of them. Maybe this is so that we don't have all of the chirps loaded on one screen. There's other ways around this, but for now, this is going to be the easiest
+
+    // get() - And then we're going to get those chirps
